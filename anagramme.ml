@@ -1,11 +1,8 @@
 let print_list lst =
   List.iter (fun x -> print_endline x) lst;;
 
-
 let prenom_nom_to_string prenom nom =
   String.lowercase_ascii (prenom ^ nom);;
-
-
 
 let load_names filename =
   let names = ref [] in
@@ -20,15 +17,12 @@ let load_names filename =
     close_in file;
     List.rev !names;;
 
-
-
 let same_letters s1 s2 =
   (* convertit les deux chaînes en listes de caractères *)
   let l1 = List.sort Char.compare (String.to_seq s1 |> List.of_seq) in
   let l2 = List.sort Char.compare (String.to_seq s2 |> List.of_seq) in
   (* compare les deux listes de caractères *)
   l1 = l2;;
-
 
 let rec all_combinations str =
   match str with
@@ -89,13 +83,6 @@ let rec lettres_non_utilisees str1 str2 =
 
 let appliquer_chaine str lst =
   List.map (fun x -> lettres_non_utilisees str x) lst
-
-
-
-
-
-
-
 
 (* fonction pour lire les lignes d'un fichier et les ajouter à une liste *)
 let read_lines file_name =
@@ -227,9 +214,16 @@ let rec concatene_avec_espace l1 l2 =
   | _ -> raise (Invalid_argument "Les listes doivent être de la même longueur")
 
 let () =
+  if Array.length Sys.argv <> 3 then
+    begin
+      Printf.printf "Usage: %s <arg1> <arg2>\n" Sys.argv.(0);
+      exit 1
+    end;
+  let arg1 = Sys.argv.(1) in
+  let arg2 = Sys.argv.(2) in
   Random.self_init ();
   let dictionnaire = load_names "data.txt" in
-  let str = "jeanveronis" in
+  let str = prenom_nom_to_string arg1 arg2 in
   let noms = prenom_possible str dictionnaire in
   let lst = remove_duplicates noms in
   let lst_lettres_restantes = appliquer_chaine str lst in
@@ -242,5 +236,3 @@ let () =
   let transition_probabilities = calc_transition_probabilities count_pairs in
   let plausible_names = generate_plausible_names_using_given_letters_list transition_probabilities lst_lettres_restantes in
   concatene_avec_espace lst plausible_names
-
-  

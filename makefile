@@ -18,6 +18,6 @@ clean:
 
 # Cible pour exécuter le programme
 run: $(TARGET)
-	./$(TARGET)
+	./$(TARGET) $(arg1) $(arg2)
 
 .PHONY: all clean run
