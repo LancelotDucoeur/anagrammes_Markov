@@ -1,6 +1,4 @@
-# Projet Universitaire : Algorithme et Complexité
-
-## Génération d'anagrammes en utilisant des chaînes de Markov
+# Génération d'anagrammes en utilisant des chaînes de Markov
 
 Ce projet a pour but de générer des anagrammes en utilisant des chaînes de Markov. Il est écrit en OCaml et utilise un Makefile pour faciliter la compilation et l'exécution du script.
 
